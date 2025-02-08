@@ -1,11 +1,7 @@
-import database from "../database.js";
-const db = database.getConnection();
+import db from "../database.js";
 
 export async function up() {
-  await db.runAsync("BEGIN TRANSACTION");
-  try {
-    // Your migration SQL here
-    await db.runAsync(`
+  db.exec(`
     CREATE TABLE IF NOT EXISTS posts(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
@@ -14,21 +10,8 @@ export async function up() {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
-    await db.runAsync("COMMIT");
-  } catch (err) {
-    await db.runAsync("ROLLBACK");
-    throw err;
-  }
 }
 
 export async function down() {
-  await db.runAsync("BEGIN TRANSACTION");
-  try {
-    // Your rollback SQL here
-    await db.runAsync("DROP TABLE IF EXISTS posts");
-    await db.runAsync("COMMIT");
-  } catch (err) {
-    await db.runAsync("ROLLBACK");
-    throw err;
-  }
+  db.exec("DROP TABLE IF EXISTS posts");
 }

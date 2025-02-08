@@ -13,14 +13,13 @@
     "commander": "^13.1.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "sqlite3": "^5.1.7"
+    "jsonwebtoken": "^9.0.2"
   },
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "migrate:up": "node cli.js up",
-    "migrate:down": "node cli.js down",
-    "migrate:create": "node cli.js create"
+    "migration:up": "node cli.js up",
+    "migration:down": "node cli.js down",
+    "migration:create": "node cli.js create"
   }
 }
